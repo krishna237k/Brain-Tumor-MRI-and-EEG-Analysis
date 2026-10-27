@@ -2,6 +2,8 @@
 
 **CIE-2 Digital Image and Video Processing Academic Project Prototype**
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/deploy?repository=krishna237k/Brain-Tumor-MRI-and-EEG-Analysis&branch=main&mainModule=app.py)
+
 ---
 
 ## 📌 1. Project Overview & Goal
