@@ -20,11 +20,13 @@ COPY models/ models/
 COPY sample_data/ sample_data/
 COPY .streamlit/ .streamlit/
 
-# Expose default Streamlit port
+# Default port (fallback to 8501 if PORT env is not specified by platform)
+ENV PORT=8501
 EXPOSE 8501
 
 # Health check to ensure the container is responsive
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD curl --fail http://localhost:${PORT}/_stcore/health || exit 1
 
-# Launch Streamlit app
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Launch Streamlit app with dynamic port support
+CMD ["sh", "-c", "streamlit run app.py --server.port=${PORT} --server.address=0.0.0.0"]
